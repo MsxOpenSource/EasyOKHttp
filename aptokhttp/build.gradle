@@ -1,0 +1,32 @@
+apply plugin: 'java'
+apply from: "../config.gradle"
+apply plugin: 'maven-publish'
+apply plugin: 'maven'
+repositories {
+    maven { url "http://192.168.1.242:8283/repository/maven-public/" }
+}
+def MAVEN_LOCAL_PATH = 'http://192.168.1.242:8283/repository/HY/'
+def ARTIFACT_ID = 'GenericHttp'
+def VERSION_NAME = '1.1.5'
+def GROUP_ID = 'com.msx7.aijia.android'
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: MAVEN_LOCAL_PATH) {
+                authentication(userName: "admin", password: "admin123")
+            }
+            pom.project {
+                groupId GROUP_ID
+                artifactId ARTIFACT_ID
+                version VERSION_NAME
+//                packaging 'aar'
+            }
+        }
+    }
+}
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+tasks.withType(Javadoc) {
+    options.encoding = 'UTF-8'
+}

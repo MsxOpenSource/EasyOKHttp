@@ -1,0 +1,79 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply from: "../config.gradle"
+
+android {
+    compileSdkVersion 27
+
+
+
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 27
+        versionCode 1
+        versionName "1.0"
+
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+
+task unzipAAr(type: Copy) {
+    group 'jar'
+    from(zipTree('build/outputs/aar/commons-release.aar'))
+    into 'build/tmp/aar'
+}
+task unzipClass(type: Copy) {
+    group 'jar'
+    from(zipTree('build/tmp/aar/classes.jar'))
+    into 'build/tmp/jar-classes'
+}
+
+task makeJar(type: Jar) {
+    group 'jar'
+    from {
+        List<File> allFiles = new ArrayList<>();
+        configurations.compile.collect {
+            for (File f : zipTree(it).getFiles()) {
+                if (f.getName().equals("classes.jar")) {
+                    allFiles.addAll(zipTree(f).getAt("asFileTrees").get(0).getDir())
+                }
+            }
+        }
+        allFiles.add(new File('build/tmp/jar-classes'))
+        allFiles // To return the result inside a lambda
+    }
+    archiveName(project.name + '.jar')
+}
+
+task copyJar(type: Copy) {
+    group 'jar'
+//    delete '../aptokhttp/libs/commons.jar'
+    from('build/libs/')
+    into('../aptokhttp/libs/')
+    include('commons.jar')
+    rename('commons.jar', 'commons.jar')
+}
+unzipAAr.dependsOn(build)
+unzipClass.dependsOn(unzipAAr)
+makeJar.dependsOn(unzipClass)
+copyJar.dependsOn(makeJar)
+
+task buildJar(dependsOn: copyJar) {
+    group 'jar'
+    println('build finish')
+}
+repositories {
+    mavenCentral()
+}
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+}

@@ -1,0 +1,42 @@
+
+ext.auto_common                 = "com.google.auto:auto-common:0.10"
+ext.auto_service                = "com.google.auto.service:auto-service:1.0-rc4"
+ext.auto_value                  = "com.google.auto.value:auto-value:1.6"
+ext.googlejavaformat            = "com.google.googlejavaformat:google-java-format:1.5"
+ext.gson                        = "com.google.code.gson:gson:2.7"
+ext.javapoet                    = "com.squareup:javapoet:1.7.0"
+ext.okhttp3                     = "com.squareup.okhttp3:okhttp:3.4.1"
+ext.retrofit2                   = "com.squareup.retrofit2:retrofit:2.1.0"
+ext.rxjava                      = "io.reactivex:rxjava:1.1.6"
+ext.rxandroid                   = "io.reactivex:rxandroid:1.2.1"
+
+
+dependencies {
+    compile fileTree(include: ["*.jar"], dir: "libs")
+
+    switch ("${project.name}") {
+
+        case "aptokhttp":
+            implementation files('libs/commons.jar')
+            implementation     "${auto_common}"
+            implementation     "${auto_service}"
+            implementation     "${auto_value}"
+            implementation     "${javapoet}"
+            implementation     "${retrofit2}"
+            implementation     "${googlejavaformat}"
+            implementation     "${rxjava}"
+            implementation     "${rxandroid}"
+            sourceCompatibility = 1.8
+            targetCompatibility = 1.8
+            break
+        case "commons":
+            compile     "${rxjava}"
+            compile     "${rxandroid}"
+            implementation "com.squareup.retrofit2:retrofit:2.1.0"
+            implementation "com.facebook.stetho:stetho-okhttp3:1.3.1"
+            implementation "com.squareup.retrofit2:converter-gson:2.0.1"
+            implementation "com.squareup.retrofit2:adapter-rxjava:2.0.0"
+            break
+
+    }
+}
