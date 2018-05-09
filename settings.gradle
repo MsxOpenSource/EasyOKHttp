@@ -1,2 +1,2 @@
-include ':demo', ':commons'
+include ':demo', ':commons', ':demoforcustomer'
 include ':aptokhttp'

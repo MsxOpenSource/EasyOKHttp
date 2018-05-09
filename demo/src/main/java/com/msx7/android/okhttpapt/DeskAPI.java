@@ -5,7 +5,6 @@ import retrofit2.http.Query;
 import rx.Observable;
 
 public interface DeskAPI {
-    @GET("http://test9.525j.com.cn/app/empapi/v1.0/emp.reservation.statistics")
-    Observable<Object> getStatistic(@Query("cityid") String cityid,
-                                    @Query("employeeid") String employeeid);
+    @GET("https://www.sojson.com/open/api/weather/json.shtml")
+    Observable<Object> getStatistic(@Query("city") String city);
 }
