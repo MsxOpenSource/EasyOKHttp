@@ -19,7 +19,8 @@ public interface DeskAPI {
             null
         }
 ```
-详细示例:
-1、[完整示例1](https://github.com/MsxOpenSource/EasyOKHttp/tree/master/demo)
-2、[完整示例2](https://github.com/MsxOpenSource/EasyOKHttp/tree/master/demoforcustomer)
+详细示例: <br/>
+1、[完整示例1](https://github.com/MsxOpenSource/EasyOKHttp/tree/master/demo)<br/>
+2、[完整示例2](https://github.com/MsxOpenSource/EasyOKHttp/tree/master/demoforcustomer)<br/>
+
 androidStudio -> run -> make modules 或者  gradle assemble  生成类 DeskAPI_Creator.java
