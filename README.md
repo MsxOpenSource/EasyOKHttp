@@ -1,11 +1,9 @@
 # EasyOKHttp
 
 ```gradle
-apply plugin: 'kotlin-android'
-apply plugin: "org.jetbrains.kotlin.kapt"
 dependencies {
-    kapt 'com.msx7.andriod:aptokhttp:0.1.1'
-    implementation 'com.msx7.andriod:commons:0.1.1'
+            annotationProcessor 'com.msx7.andriod:aptokhttp:0.1.4'
+            implementation 'com.msx7.andriod:commons:0.1.2'
 }
 ```
 

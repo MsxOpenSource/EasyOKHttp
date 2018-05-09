@@ -74,6 +74,30 @@ task buildJar(dependsOn: copyJar) {
 repositories {
     mavenCentral()
 }
-dependencies {
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+tasks.withType(Javadoc){
+    options.encoding = "UTF-8"
+    excludes = ['**/*.kt']
+}
+
+
+apply plugin: 'com.novoda.bintray-release'
+
+publish {
+    userOrg = 'xw8852'//bintray.com用户名
+    groupId = 'com.msx7.andriod'//jcenter上的路径
+    artifactId = 'commons'//项目名称
+    publishVersion = '0.1.2'//版本号
+    desc = 'commons of apt plugins for Okhttp + retrofit2 + rxandroid'//描述，不重要
+    website = 'https://github.com/MsxOpenSource/EasyOKHttp'//网站，最好有，不重要
+//    bintrayUser = ""
+//    bintrayKey = ""
+    dryRun = false
+}
+artifacts {
+//    published sourceJar
+//    published javadoc
+//    publish   buildJar
 }

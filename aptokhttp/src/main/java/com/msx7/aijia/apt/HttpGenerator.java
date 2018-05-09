@@ -102,7 +102,7 @@ public class HttpGenerator implements BasicAnnotationProcessor.ProcessingStep {
             convertClass = elementsByAnnotation.get(Convert.class).iterator().next().asType().toString();
 
         if (elementsByAnnotation.get(HRetrofit.class).isEmpty()) {
-            retrofitClass = MRetorfit.Companion.getClass().getName().replace("$", ".");
+            retrofitClass = MRetorfit.class.getName();
         } else
             retrofitClass = elementsByAnnotation.get(HRetrofit.class).iterator().next().asType().toString();
 

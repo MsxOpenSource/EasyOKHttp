@@ -1,32 +1,32 @@
 apply plugin: 'java'
 apply from: "../config.gradle"
-apply plugin: 'maven-publish'
-apply plugin: 'maven'
-repositories {
-    maven { url "http://192.168.1.242:8283/repository/maven-public/" }
+apply plugin: 'com.novoda.bintray-release'
+
+publish {
+    userOrg = 'xw8852'//bintray.com用户名
+    groupId = 'com.msx7.andriod'//jcenter上的路径
+    artifactId = 'aptokhttp'//项目名称
+    publishVersion = '0.1.4'//版本号
+    desc = 'apt  library for Okhttp + retrofit2 + rxandroid'//描述，不重要
+    website = 'https://github.com/MsxOpenSource/EasyOKHttp'//网站，最好有，不重要
+//    bintrayUser = ""
+//    bintrayKey = ""
+    dryRun = false
 }
-def MAVEN_LOCAL_PATH = 'http://192.168.1.242:8283/repository/HY/'
-def ARTIFACT_ID = 'GenericHttp'
-def VERSION_NAME = '1.1.5'
-def GROUP_ID = 'com.msx7.aijia.android'
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: MAVEN_LOCAL_PATH) {
-                authentication(userName: "admin", password: "admin123")
-            }
-            pom.project {
-                groupId GROUP_ID
-                artifactId ARTIFACT_ID
-                version VERSION_NAME
-//                packaging 'aar'
-            }
-        }
-    }
+
+task sourceJar(type: Jar) {
+    classifier = 'sources'
+    from sourceSets.main.allJava
 }
+
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }
-tasks.withType(Javadoc) {
-    options.encoding = 'UTF-8'
+tasks.withType(Javadoc){
+    options.encoding = "UTF-8"
+    excludes = ['**/*.kt']
 }
+//artifacts {
+//    published sourceJar
+//    published javadoc
+//}
