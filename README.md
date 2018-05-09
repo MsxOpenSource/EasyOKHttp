@@ -6,7 +6,7 @@ dependencies {
             implementation 'com.msx7.andriod:commons:0.1.2'
 }
 ```
-
+-- 示例
 ```demo
 public interface DeskAPI {
     @GET("https://www.sojson.com/open/api/weather/json.shtml")
@@ -19,4 +19,7 @@ public interface DeskAPI {
             null
         }
 ```
-androidStudio -> run -> make modules or  gradle assemble  generate DeskAPI_Creator.java
+详细示例:
+1、[完整示例1](https://github.com/MsxOpenSource/EasyOKHttp/tree/master/demo)
+2、[完整示例2](https://github.com/MsxOpenSource/EasyOKHttp/tree/master/demoforcustomer)
+androidStudio -> run -> make modules 或者  gradle assemble  生成类 DeskAPI_Creator.java
